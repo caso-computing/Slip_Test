@@ -221,7 +221,12 @@ class Level extends Phaser.Scene
         this.movingPlatformv3.body.allowGravity = false;
         //this.movingPlatformv2.setVelocityX(50);
 
-        this.player = this.physics.add.sprite(gameState.dudeX, gameState.dudeY, 'dude');
+        if (gameState.dudeFalling==true){
+            gameState.dudeFalling=false;
+            this.dudeX=gameState.dudeX;
+            this.dudeY=-20;
+        }
+        this.player = this.physics.add.sprite(this.dudeX, this.dudeY, 'dude');
         gameState.player=this.player;
 
        this.createSnow();
@@ -523,14 +528,18 @@ class Level extends Phaser.Scene
         }
         this.enemy.rotation +=gameState.enemyRot;
 */
-        // Check to see if player has fallen into the lava.
-        // if so, restart level
+        // Check to see if player has fallen off this level.
+        // If so, make sure 'Dude' drops through the previous level
+        // at the x coordinate he's currently at.
+        //
         if (this.player.y > gameState.bg3.height) {
             //music.stop();
             this.cameras.main.shake(240, .01, false, function(camera, progress) {
               if (progress > .9) {
                 //this.scene.restart(this.example);
                 //music.stop();
+                gameState.dudeFalling=true;
+                gameState.dudeX=this.player.x;
                 this.scene.stop(this.levelKey);
                 this.scene.start(this.prevLevel[this.levelKey]);
                 
@@ -633,20 +642,26 @@ setWeather(weather) {
       //this.heights = [8.2, 7, 5, null, 5, 3, null, 3, 3];
       //this.heights = [8.4, null, 8.4, 6.0, 8.4, 6.0, null, 4.0, 8.4, null, 6.0, null, 6.0];
       this.heights= [
-        [0,6,false],
-        [0,4,false],
-        [0,2,false],
-        [1,5.75,false],
-        [2,5.75,false],
-        [2,3,false],
-        [2,1,false],
-        [3,6,false],
-        [4,6,false],
-        [4,0.1,false],
-        [5,5.75,false],
-        [5,0.1,false],
-        [6,6,false],
-        [7,6,false]
+        [0,6],
+        [0,4],
+        [0,2],
+        [1,5.75],
+        [2,5.75],
+        [2,3],
+        [2,1],
+        [3,6],
+        [4,6],
+        [4,0.1],
+        [5,5.75],
+        [5,0.1],
+        [6,6],
+        [7,6],
+        [8,6],
+        [9,6],
+        [10,6],
+        [11,6],
+        [12,6],
+        [13,6]
         ]
       
 
@@ -654,6 +669,8 @@ setWeather(weather) {
       this.top = false;
       this.bottom = true;
       this.drag = 1500;
+      this.dudeX=170;
+      this.dudeY=400;
     }
   }
   
@@ -665,19 +682,20 @@ setWeather(weather) {
       //this.heights = [8, 4, null, 4, 6, 4, 6, 5, 5];
       //this.heights = [8.4, 8.4,null, 8.4, 6.0, 8.4, 6.0, null, 4.0, 8.4, null, 6.0, null, 6.0];
       this.heights= [
-        [0,4,false],
-        [0,2,false],
-        [1,5.75,false],
-        [2,3,false],
-        [2,1,false],
-        [4,0.25,false],
-        [5,0.25,false],
+        [0,4],
+        [0,2],
+        [1,5.75],
+        [2,3],
+        [2,1],
+        [4,2.5],
+        [5,0.25],
         ]
       this.weather = 'twilight';
       this.top = false;
       this.bottom = false;
       this.drag = 100;
-      gameState.dudeX=170;
+      this.dudeX=170;
+      this.dudeY=400;
     }
   }
 
@@ -688,19 +706,21 @@ setWeather(weather) {
       
       //this.heights = [8.4, null, 8.4, 6.0, 8.4, 6.0, null, 4.0, 8.4, null, 6.0, null, 6.0];
       this.heights= [
-        [0,4,false],
-        [0,2,false],
-        [1,5.75,false],
-        [2,3,false],
-        [2,1,false],
-        [4,0.25,false],
-        [5,0.25,false],
+        [0,4],
+        [0,2],
+        [1,5.75],
+        [2,3],
+        [2,1],
+        [4,2.5],
+        [5,0.25],
         ]
       
       this.weather = 'night';
       this.top = true;
       this.bottom = false;
       this.drag=50;
+      this.dudeX=170;
+      this.dudeY=400;
     }
   }
 
@@ -754,6 +774,7 @@ class Outro extends Phaser.Scene {
         }
 
         this.input.on('pointerdown', () => {
+            gameState.dudeFalling=false;
             this.cameras.main.fade(1000, 0,0,0);
             this.time.delayedCall(1000, () => this.scene.start(gameState.nextLevel));
         });
@@ -771,7 +792,7 @@ const gameState = {
     stars: 0,
     enemyRot: .01,      //rotation amount of enemy shooter
     dudeX: 100,         //set starting x,y position of dude
-    dudeY: 450,
+    dudeFalling: false,
     nextLevel: 'Level4'
   };
   

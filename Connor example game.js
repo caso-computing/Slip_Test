@@ -142,6 +142,8 @@ class Level extends Phaser.Scene
         this.starCollected = this.add.text(650,75,'Captured: '+gameState.stars, {fontsize: '12px', fill: '#000'});
         
 
+        this.createStars();
+        
         // Parallax Backgrounds setup
     
         const game_width = parseFloat(gameState.bg3.getBounds().width)
@@ -573,7 +575,24 @@ class Level extends Phaser.Scene
         gameState.stars +=1;
     }
 
-
+    createStars() {
+        gameState.nightstars = [];
+        function getStarPoints() {
+          const color = 0xffffff;
+          return {
+            x: Math.floor(Math.random() * 900),
+            y: Math.floor(Math.random() * config.height * .5),
+            radius: Math.floor(Math.random() * 3),
+            color,
+          }
+        }
+        for (let i = 0; i < 200; i++) {
+          const { x, y, radius, color} = getStarPoints();
+          const star = this.add.circle(x, y, radius, color)
+          star.setScrollFactor(Math.random() * .1);
+          gameState.nightstars.push(star)
+        }
+      }
 
 
 setWeather(weather) {
@@ -624,13 +643,13 @@ setWeather(weather) {
     for (let platform of this.platforms.getChildren()) {
       platform.setTint(color);
     }
-    /*
+    
     if (weather === 'night') {
-      gameState.stars.forEach(star => star.setVisible(true));
+      gameState.nightstars.forEach(star => star.setVisible(true));
     } else {
-      gameState.stars.forEach(star => star.setVisible(false));
+      gameState.nightstars.forEach(star => star.setVisible(false));
     }
-    */
+    
 
     return
   }

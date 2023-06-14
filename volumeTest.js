@@ -146,7 +146,7 @@ const config = {
       width: 1920,
       height: 1080,
   },
-  backgroundColor: 0x132854,
+  //backgroundColor: 0x132854,
   physics: {
     default: 'arcade',
     arcade: {

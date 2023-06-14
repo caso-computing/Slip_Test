@@ -111,12 +111,15 @@ const gameState = {
     masterVol: .5
   };
   
-const config = {
-    type: Phaser.AUTO,
+/*
+  const config = {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    //type: Phaser.AUTO,
     width: 1920,
     height: 1080,
     backgroundColor: 0x880808,
-    //pixelArt: true,
+    pixelArt: true,
     parent: 'phaser-example',
     physics: {
         default: 'arcade',
@@ -128,6 +131,30 @@ const config = {
     },
     scene: [Level1]
     
+};
+*/
+
+//config from Connor's code
+//
+const config = {
+  scale: {
+      mode: Phaser.Scale.FIT,
+      pixelArt: true,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      width: 1920,
+      height: 1080,
+  },
+  backgroundColor: 0x880808,
+  physics: {
+    default: 'arcade',
+    arcade: {
+        gravity: { y: 300 },
+        enableBody: true,
+        debug: true
+    }
+},
+  scene: [Level1],
+  title: "Cinematic",
 };
 
 const game = new Phaser.Game(config);

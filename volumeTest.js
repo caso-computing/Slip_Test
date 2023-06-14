@@ -113,9 +113,10 @@ const gameState = {
   
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    pixelArt: true,
+    width: 1920,
+    height: 1080,
+    backgroundColor: 0x880808,
+    //pixelArt: true,
     parent: 'phaser-example',
     physics: {
         default: 'arcade',

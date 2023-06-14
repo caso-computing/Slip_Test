@@ -53,7 +53,7 @@ class Level extends Phaser.Scene
         const offSet= 650;
 
 
-        gameState.cursors = this.input.keyboard.createCursorKeys();
+        //gameState.cursors = this.input.keyboard.createCursorKeys();
 
         // set up some "soothing" game background music from Holst
 
@@ -63,6 +63,7 @@ class Level extends Phaser.Scene
         music.play({
             seek:5
         });
+
         this.volBar=this.add.rectangle(400,300,100,10, 0x00ffff)
         this.slider=this.add.rectangle(400,300,10,10,0xffff00);
 
@@ -86,6 +87,7 @@ class Level extends Phaser.Scene
       gameState.bgMusic.volume=gameState.masterVol;
     }
 }
+
 class Level1 extends Level {
     constructor() {
       super('Level1')
@@ -118,7 +120,7 @@ const gameState = {
     //type: Phaser.AUTO,
     width: 1920,
     height: 1080,
-    backgroundColor: 0x880808,
+    //backgroundColor: 0x880808,
     pixelArt: true,
     parent: 'phaser-example',
     physics: {

@@ -143,7 +143,7 @@ class Level extends Phaser.Scene
         
 
         this.createStars();
-        
+           
         // Parallax Backgrounds setup
     
         const game_width = parseFloat(gameState.bg3.getBounds().width)

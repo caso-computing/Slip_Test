@@ -43,6 +43,7 @@ class Level extends Phaser.Scene
     }
     create()
     {
+        alert('Im here');
         gameState.active=true;
         gameState.min=0;
         gameState.sec=0;

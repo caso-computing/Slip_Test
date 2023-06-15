@@ -68,24 +68,30 @@ class Level extends Phaser.Scene
 
         this.volBar=this.add.rectangle(600,600,800,80, 0x00ffff)
         this.slider=this.add.rectangle(600,600,80,160,0xffff00);
-
+/*
         this.slider.setInteractive({draggable: true});
 
-        this.input.on('drag', (pointer,gameObject,dragX)=> {
+        this.input.on('drag', (plugin, gameObject, dragX,dragY) => {
             //  By clamping dragX we can keep it within
             //  whatever bounds we need
-            dragX = Phaser.Math.Clamp(dragX, 200, 1000);
+            dragY = Phaser.Math.Clamp(dragY, 200, 1000);
 
             //  By only applying the dragX we can limit the drag
             //  to be horizontal only
-            gameObject.x = dragX;
+            gameObject.y = dragY;
 
         });
-
+*/
+        gameState.horizontal=true;
+        setVolBar(this, this.slider,gameState.horizontal);
     }
     update()
     {
-      gameState.masterVol=(this.slider.x-200)/800;
+      if (gameState.horizontal){
+        gameState.masterVol=(this.slider.x-200)/800
+      }else {
+        gameState.masterVol=(this.slider.y-200)/800;
+      }
       gameState.bgMusic.volume=gameState.masterVol;
     }
 }
@@ -102,6 +108,32 @@ class Level1 extends Level {
       this.dudeX=170;
       this.dudeY=400;
     }
+  }
+
+  function setVolBar(scene, obj, horizontal) {
+    console.log('It works B');
+
+        obj.setInteractive({draggable: true});
+
+        scene.input.on('drag', (plugin, gameObject, dragX,dragY) => {
+          if (horizontal){
+            dragX = Phaser.Math.Clamp(dragX, 200, 1000);
+
+            //  By only applying the dragX we can limit the drag
+            //  to be horizontal only
+            gameObject.x = dragX;
+
+          }else{
+            //  By clamping dragY we can keep it within
+            //  whatever bounds we need
+            dragY = Phaser.Math.Clamp(dragY, 200, 1000);
+
+            //  By only applying the dragX we can limit the drag
+            //  to be horizontal only
+            gameObject.y = dragY;
+
+          }
+        });
   }
 const gameState = {
     speed: 240,

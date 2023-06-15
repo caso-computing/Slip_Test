@@ -66,15 +66,15 @@ class Level extends Phaser.Scene
             seek:5
         });
 
-        this.volBar=this.add.rectangle(400,300,100,10, 0x00ffff)
-        this.slider=this.add.rectangle(400,300,10,10,0xffff00);
+        this.volBar=this.add.rectangle(600,600,200,20, 0x00ffff)
+        this.slider=this.add.rectangle(600,600,20,20,0xffff00);
 
         this.slider.setInteractive({draggable: true});
 
         this.input.on('drag', (pointer,gameObject,dragX)=> {
             //  By clamping dragX we can keep it within
             //  whatever bounds we need
-            dragX = Phaser.Math.Clamp(dragX, 350, 450);
+            dragX = Phaser.Math.Clamp(dragX, 500, 700);
 
             //  By only applying the dragX we can limit the drag
             //  to be horizontal only
@@ -85,7 +85,7 @@ class Level extends Phaser.Scene
     }
     update()
     {
-      gameState.masterVol=(this.slider.x-350)/100;
+      gameState.masterVol=(this.slider.x-500)/200;
       gameState.bgMusic.volume=gameState.masterVol;
     }
 }

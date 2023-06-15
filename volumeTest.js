@@ -44,7 +44,6 @@ class Level extends Phaser.Scene
     }
     create()
     {
-        alert('Im here');
         gameState.active=true;
         gameState.min=0;
         gameState.sec=0;
@@ -63,7 +62,8 @@ class Level extends Phaser.Scene
         const music = gameState.bgMusic;
         music.stop();
         music.play({
-            seek:5
+            seek:5,
+            loop: true
         });
 
         this.volBar=this.add.rectangle(600,600,200,20, 0x00ffff)

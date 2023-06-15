@@ -36,13 +36,15 @@ class Level extends Phaser.Scene
         this.load.image('bg3','snowdunes.png')
         this.load.spritesheet('campfire2','campfire.png',{ frameWidth: 32, frameHeight: 32}); 
         this.load.spritesheet('enemy','campfire.png',{ frameWidth: 32, frameHeight: 32});      
-        this.load.audio('mars', 'Mars, the Bringer of War.ogg')
+        this.load.audio('mars', 'Mars, the Bringer of War.ogg');
+        this.load.audio('BGMusic','Succession (Main Title Theme) - Nicholas Britell  Succession (HBO Original Series Soundtrack).mp3');
         this.load.image('bg2', 'trees.png');
         this.load.image('enemyBullet', 'snowflake.png');
         this.load.image('snowflakes','snowflake.png');
     }
     create()
     {
+      alert('im here');
         gameState.active=true;
         gameState.min=0;
         gameState.sec=0;
@@ -57,7 +59,7 @@ class Level extends Phaser.Scene
 
         // set up some "soothing" game background music from Holst
 
-        gameState.bgMusic = this.sound.add('mars');
+        gameState.bgMusic = this.sound.add('BGMusic');
         const music = gameState.bgMusic;
         music.stop();
         music.play({

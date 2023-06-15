@@ -44,7 +44,7 @@ class Level extends Phaser.Scene
     }
     create()
     {
-      alert('im here');
+        alert('Im here');
         gameState.active=true;
         gameState.min=0;
         gameState.sec=0;
@@ -148,7 +148,7 @@ const config = {
       width: 1920,
       height: 1080,
   },
-  //backgroundColor: 0x132854,
+  backgroundColor: 0x132854,
   physics: {
     default: 'arcade',
     arcade: {

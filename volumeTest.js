@@ -82,7 +82,7 @@ class Level extends Phaser.Scene
 
         });
 */
-        gameState.horizontal=true;
+        gameState.horizontal=false;
         setVolBar(this, this.slider,gameState.horizontal);
     }
     update()
@@ -90,7 +90,7 @@ class Level extends Phaser.Scene
       if (gameState.horizontal){
         gameState.masterVol=(this.slider.x-200)/800
       }else {
-        gameState.masterVol=(this.slider.y-200)/800;
+        gameState.masterVol=(1000-this.slider.y)/800;
       }
       gameState.bgMusic.volume=gameState.masterVol;
     }
